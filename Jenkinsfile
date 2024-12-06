@@ -8,15 +8,21 @@ pipeline {
       }
     }
 
-    stage('Docker Build') {
+    stage('Build Docker Image') {
       steps {
         sh 'docker build -t php-app .'
       }
     }
 
+    stage('Run Docker Container') {
+      steps {
+        sh 'docker run -dit --name php-app php-app'
+      }
+    }
+
     stage('Run Test') {
       steps {
-        sh 'docker run --rm php-app ./vendor/bin/phpunit ./tests'
+        sh 'docker exec php-app ./vendor/bin/phpunit tests'
       }
     }
   }

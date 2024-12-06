@@ -16,7 +16,7 @@ pipeline {
 
     stage('Run Test') {
       steps {
-        sh 'docker run php-app ./vendor/bin/phpunit ./tests'
+        sh 'docker run --rm php-app ./vendor/bin/phpunit ./tests'
       }
     }
   }

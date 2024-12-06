@@ -8,11 +8,11 @@ pipeline {
       }
     }
 
-    stage('Build Docker Image') {
-      steps {
-        sh 'docker build -t php-app .'
-      }
-    }
+    // stage('Build Docker Image') {
+    //   steps {
+    //     sh 'docker build -t php-app .'
+    //   }
+    // }
 
     stage('Run Docker Container') {
       steps {

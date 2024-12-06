@@ -21,4 +21,14 @@ pipeline {
     }
   }
 
+  post {
+    success {
+      slackSend (color: '#00FF00', channel: '#tutorial', message: "Todo bien")
+    }
+
+    failure {
+      slackSend (color: '#FF0000', channel: '#tutorial', message: "Algo salió mal")
+    }
+  }
+
 }

@@ -9,7 +9,7 @@ class CalculatorTest extends TestCase
     {
         // hooa
         $calculator = new Calculator();
-        $this->assertEquals(5, $calculator->add(2, 3), "Adding 2 and 3 should return 5");
+        $this->assertEquals(52, $calculator->add(2, 3), "Adding 2 and 3 should return 5");
     }
 
     public function testAdd2()

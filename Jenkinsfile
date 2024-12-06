@@ -7,6 +7,18 @@ pipeline {
         sh 'docker info'
       }
     }
+
+    stage('Docker Build') {
+      steps {
+        sh 'docker build -t php-app .'
+      }
+    }
+
+    stage('Run Test') {
+      steps {
+        sh 'docker run php-app ./vendor/bin/phpunit ./tests'
+      }
+    }
   }
 
 }

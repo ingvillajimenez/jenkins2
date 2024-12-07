@@ -26,6 +26,13 @@ pipeline {
         sh 'docker exec php-app ./vendor/bin/phpunit tests'
       }
     }
+
+    stage('Deploy') {
+      steps {
+        sshagent (credentials: ['server-deploy']) {
+          sh './deploy.sh'
+      }
+    }
   }
 
   post {

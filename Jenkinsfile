@@ -1,6 +1,6 @@
 pipeline {
-  agent { label 'ubuntu' }
-  // agent any
+  // agent { label 'ubuntu' }
+  agent any
 
   stages {
     stage('Verificar Docker') {

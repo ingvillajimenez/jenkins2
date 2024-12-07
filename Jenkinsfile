@@ -31,6 +31,7 @@ pipeline {
       steps {
         sshagent (credentials: ['server-deploy']) {
           sh './deploy.sh'
+        }
       }
     }
   }

@@ -1,6 +1,6 @@
 pipeline {
-  // agent { label 'ubuntu' }
-  agent any
+  agent { label 'ubuntu' }
+  // agent any
 
   stages {
     stage('Verificar Docker') {
@@ -29,6 +29,11 @@ pipeline {
   }
 
   post {
+    always {
+      sh 'docker stop php-app'
+      sh 'docker rm php-app'
+    }
+
     success {
       slackSend (color: '#00FF00', channel: '#tutorial', message: "Todo bien")
     }

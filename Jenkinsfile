@@ -1,5 +1,6 @@
 pipeline {
-  agent { label 'ubuntu' }
+  // agent { label 'ubuntu' }
+  agent any
 
   stages {
     stage('Verificar Docker') {
@@ -8,11 +9,11 @@ pipeline {
       }
     }
 
-    // stage('Build Docker Image') {
-    //   steps {
-    //     sh 'docker build -t php-app .'
-    //   }
-    // }
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker build -t php-app .'
+      }
+    }
 
     stage('Run Docker Container') {
       steps {
@@ -20,7 +21,7 @@ pipeline {
       }
     }
 
-    stage('Run Test') {
+    stage('Run Tests') {
       steps {
         sh 'docker exec php-app ./vendor/bin/phpunit tests'
       }

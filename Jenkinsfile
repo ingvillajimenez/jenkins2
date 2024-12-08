@@ -3,52 +3,41 @@ pipeline {
   agent any
 
   stages {
-    stage('Verificar Docker') {
+    stage('Verificar docker') {
       steps {
         sh 'docker info'
       }
     }
 
-    stage('Build Docker Image') {
-      steps {
-        sh 'docker build -t php-app .'
-      }
-    }
+    // stage('Docker build') {
+    //   steps {
+    //     sh 'docker build -t php-app .'
+    //   }
+    // }
 
-    stage('Run Docker Container') {
-      steps {
-        sh 'docker run -dit --name php-app php-app'
-      }
-    }
+    // stage('Run tests') {
+    //   steps {
+    //     sh 'docker run --rm php-app ./vendor/bin/phpunit tests'
+    //   }
+    // }
 
-    stage('Run Tests') {
-      steps {
-        sh 'docker exec php-app ./vendor/bin/phpunit tests'
-      }
-    }
-
-    stage('Deploy') {
-      steps {
-        sshagent (credentials: ['server-deploy']) {
-          sh './deploy.sh'
-        }
-      }
-    }
+    // stage('Deploy') {
+    //   steps {
+    //     sshagent (credentials: ['server-deploy']) {
+    //       sh './deploy.sh'
+    //     }
+    //   }
+    // }
   }
 
-  post {
-    always {
-      sh 'docker stop php-app'
-      sh 'docker rm php-app'
-    }
+  // post {
+  //   success {
+  //     slackSend (color: '#00FF00', channel: '#tutorial', message: "Todo bien")
+  //   }
 
-    success {
-      slackSend (color: '#00FF00', channel: '#tutorial', message: "Todo bien")
-    }
-
-    failure {
-      slackSend (color: '#FF0000', channel: '#tutorial', message: "Algo salió mal")
-    }
-  }
+  //   failure {
+  //     slackSend (color: '#FF0000', channel: '#tutorial', message: "Algo salió mal")
+  //   }
+  // }
 
 }

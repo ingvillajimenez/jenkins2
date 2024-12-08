@@ -9,6 +9,18 @@ pipeline {
       }
     }
 
+
+    stage('Sonarqube') {
+      steps {
+        script {
+          docker.image('sonarsource/sonar-scanner-cli:5.0.1').inside('--network ci-network') {
+            sh 'sonar-scanner'
+          }
+        }
+      }
+    }
+
+
     // stage('Docker build') {
     //   steps {
     //     sh 'docker build -t php-app .'

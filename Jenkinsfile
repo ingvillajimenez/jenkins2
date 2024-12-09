@@ -17,8 +17,9 @@ pipeline {
             sh '''
               sonar-scanner \
                 -Dsonar.host.url=http://sonarqube:9000 \
-                -Dsonar.projectKey=php-app \
+                -Dsonar.projectKey=my-php-app \
                 -Dsonar.sources=src \
+                -Dsonar.token=squ_9d526fbcf214a87c6105f3279b9750be8bce6d45
             '''
           }
         }

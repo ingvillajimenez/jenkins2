@@ -24,6 +24,7 @@ pipeline {
                 -Dsonar.projectKey=my-php-app \
                 -Dsonar.sources=src \
                 -Dsonar.token=$SONAR_TOKEN
+                -Dsonar.branch.name=$BRANCH_NAME
             '''
           }
         }

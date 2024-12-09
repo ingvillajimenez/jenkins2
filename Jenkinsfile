@@ -16,16 +16,18 @@ pipeline {
 
     stage('Sonarqube') {
       steps {
-        script {
-          docker.image('sonarsource/sonar-scanner-cli:5.0.1').inside('--network ci-network') {
-            sh '''
-              sonar-scanner \
-                -Dsonar.host.url=http://sonarqube:9000 \
-                -Dsonar.projectKey=my-php-app \
-                -Dsonar.sources=src \
-                -Dsonar.token=$SONAR_TOKEN \
-                -Dsonar.branch.name=${BRANCH_NAME}
-            '''
+        withSonarQubeEnv('sonarqube-server') {
+          script {
+            docker.image('sonarsource/sonar-scanner-cli:5.0.1').inside('--network ci-network') {
+              sh '''
+                sonar-scanner \
+                  -Dsonar.host.url=http://sonarqube:9000 \
+                  -Dsonar.projectKey=my-php-app \
+                  -Dsonar.sources=src \
+                  -Dsonar.token=$SONAR_TOKEN \
+                  -Dsonar.branch.name=${BRANCH_NAME}
+              '''
+            }
           }
         }
       }

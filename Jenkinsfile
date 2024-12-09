@@ -2,6 +2,10 @@ pipeline {
   // agent { label 'ubuntu' }
   agent any
 
+  environment {
+    SONAR_TOKEN = credentials('sonar')
+  }
+
   stages {
     stage('Verificar docker') {
       steps {
@@ -19,7 +23,7 @@ pipeline {
                 -Dsonar.host.url=http://sonarqube:9000 \
                 -Dsonar.projectKey=my-php-app \
                 -Dsonar.sources=src \
-                -Dsonar.token=squ_9d526fbcf214a87c6105f3279b9750be8bce6d45
+                -Dsonar.token=$SONAR_TOKEN
             '''
           }
         }

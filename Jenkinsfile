@@ -14,7 +14,7 @@ pipeline {
     }
 
 
-    stage('Sonarqube') {
+    stage('sonarqube-server') {
       steps {
         withSonarQubeEnv('sonarqube-server') {
           script {
